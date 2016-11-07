@@ -1,0 +1,29 @@
+
+#clock {
+    display: inline-block;
+    line-height: 500px;
+    font-size: 100px;
+}
+
+div {
+    text-align: center;
+    vertical-align: middle;
+}
+
+button{
+    display:inline-block;
+    background-color: #40b2aa;
+    width: 150px;
+    height:50px;
+    border-radius: 10px;
+    border-color: #40b2aa;
+    margin: 15px;
+}
+
+#main {
+    height: 500px;
+    width: 500px;
+    margin: 15px auto;
+    background-color: crimson;
+    border-radius: 50%;
+}
