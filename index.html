@@ -4,20 +4,43 @@
     <meta charset="UTF-8">
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" type ="text/css" href="main.css">
+    <script src="jquery-3.1.1%20(1).js"></script>
 </head>
 <body>
 
     <audio id="beep" src="sound.mp3"></audio>
 
-    <div id="main">
-        <span id="clock">25:00</span>
+    <div id="digitalClock">
+        <div>
+            <span id=minutes class="inputSwitch">00</span>
+            <div class="smalltext">Minutes</div>
+        </div><!---
+
+     ---><div>
+            <span id="seconds" class="inputSwitch">00</span>
+            <div class="smalltext">Seconds</div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
 
     <div>
-        <button onclick="startCountDown()">Start</button>
-        <button onclick="stop()">Stop</button>
+        <button>Start</button><!--
+        --><button>Stop</button>
     </div>
+
+    <script>
+        (function(){
+            $('span').click(function () {
+                $(this).attr('contentEditable', true);
+
+            })
+            $('span').on('keydown paste'), function(){
+                if($(this).text().length==2){
+                    event.preventDefault();
+                }
+            }
+        })();
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
