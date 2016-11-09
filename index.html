@@ -12,33 +12,61 @@
 
     <div id="digitalClock">
         <div>
-            <span id=minutes class="inputSwitch">00</span>
+            <span id=minutes class="inputSwitch" contenteditable="true">00</span>
             <div class="smalltext">Minutes</div>
         </div><!---
 
      ---><div>
-            <span id="seconds" class="inputSwitch">00</span>
+            <span id="seconds" class="inputSwitch" contenteditable="true">00</span>
             <div class="smalltext">Seconds</div>
         </div>
     </div>
 
 
     <div>
-        <button>Start</button><!--
-        --><button>Stop</button>
+        <button onclick="setWork()">Work!</button><!--
+     --><button onclick="setBreak()">Break!</button>
+    </div>
+    <div>
+        <button id="start" onclick="startCountDown()">Start!</button>
+    </div>
+    <div>
+        <button id="start" onclick="stop()">Stop!</button>
     </div>
 
     <script>
         (function(){
-            $('span').click(function () {
-                $(this).attr('contentEditable', true);
+            $('#seconds').on('click', function () {
+                $(this).text('');
+            });
 
-            })
-            $('span').on('keydown paste'), function(){
+            $('#seconds').on('keypress', function (event) {
+                if(event.which < 48 || event.which>57){
+                    event.preventDefault();
+                }
+            });
+
+            $('#seconds').on('keypress', function (event) {
+                    if($(this).text().length==2){
+                        event.preventDefault();
+                    }
+            });
+
+            $('#minutes').on('click', function () {
+                $(this).text('');
+            });
+
+            $('#minutes').on('keypress', function (event) {
+                if(event.which < 48 || event.which>57){
+                    event.preventDefault();
+                }
+            });
+
+            $('#minutes').on('keypress', function (event) {
                 if($(this).text().length==2){
                     event.preventDefault();
                 }
-            }
+            })
         })();
     </script>
     <script src="script.js"></script>

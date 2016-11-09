@@ -2,12 +2,17 @@
  * Created by Jasiek on 06.11.2016.
  */
 
-var min = 25;
-var sec = 0;
+
+
+var workmin;
+var worksec;
+var breaksec;
+var breakmin;
 var previousSecond = -1;
 var interval;
 var work = true;
-
+var min;
+var sec;
 function displaySeconds(seconds){
     if(seconds < 10){
         return "0" + seconds;
@@ -26,6 +31,11 @@ function displayMinutes(minutes) {
     }
 }
 
+function displayTime(){
+    document.getElementById('seconds').textContent=displaySeconds(sec);
+    document.getElementById('minutes').textContent=displayMinutes(min);
+}
+
 function decreaseTimer(){
     if(sec == 0){
         sec = 59;
@@ -36,17 +46,25 @@ function decreaseTimer(){
     }
 }
 
+function setWork() {
+    min = workmin = parseInt(document.getElementById('minutes').textContent);
+    sec = worksec = parseInt(document.getElementById('seconds').textContent);
+}
+function setBreak() {
+    breakmin = parseInt(document.getElementById('minutes').textContent);
+    breaksec = parseInt(document.getElementById('seconds').textContent);
+}
 function myTimer() {
     var d = new Date();
     if(previousSecond != d.getSeconds()){
         if(previousSecond == -1){
-            document.getElementById("clock").innerHTML = displayMinutes(min) + ":" + displaySeconds(sec);
+            displayTime();
             previousSecond = d.getSeconds();
             decreaseTimer()
         }
         else{
             previousSecond = d.getSeconds();
-            document.getElementById("clock").innerHTML = displayMinutes(min) + ":" + displaySeconds(sec);
+            displayTime();
             decreaseTimer();
         }
 
@@ -61,18 +79,16 @@ function startCountDown(){
         if(min==-1 && sec == 59){
             clearInterval(interval);
             if (work==true){
-                min = 5;
-                sec = 0;
+                min = breakmin;
+                sec = breaksec;
                 work=false;
             }
             else{
-                min=25;
-                sec=0;
+                min=workmin;
+                sec=worksec;
                 work=true;
             }
-
-
-            document.getElementById("clock").innerHTML = displayMinutes(min) + ":" + displaySeconds(sec);
+            displayTime();
             document.getElementById("beep").play();
             setTimeout(startCountDown(), 3000);
         }
@@ -84,8 +100,8 @@ function startCountDown(){
 
 function stop(){
     clearInterval(interval);
-    min=25;
-    sec=0;
-    document.getElementById("clock").innerHTML = displayMinutes(min) + ":" + displaySeconds(sec);
+    min=workmin;
+    sec=worksec;
+    displayTime()
 }
 
